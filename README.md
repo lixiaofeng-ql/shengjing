@@ -39,9 +39,25 @@ python -m http.server 8080 --bind 0.0.0.0
 
 ## 部署（免费）
 
+**线上地址：https://lixiaofeng-ql.github.io/shengjing/**
+
 项目是纯静态站点，产物在 `www/` 目录（`npm run pack:www` 生成，约 8.4 MB）。以下方案均免费：
 
-### 方案一：Netlify Drop（最快，零配置）
+### 已启用：GitHub Pages
+
+仓库已内置 `.github/workflows/deploy-pages.yml`，推送到 `main` 分支即自动构建发布：
+
+```bash
+git add -A
+git commit -m "更新内容"
+git push
+```
+
+访问 https://lixiaofeng-ql.github.io/shengjing/ 即可。Pages 设置：Settings → Pages → Source = GitHub Actions。
+
+注意：所有资源都用相对路径（`./sw.js`、`data/cuv.json`），放在子目录下也能正常工作。
+
+### 方案二：Netlify Drop（最快，零配置）
 
 1. 打开 <https://app.netlify.com/drop>
 2. 把本地 `www` 文件夹整个拖进去
@@ -56,23 +72,6 @@ npm i -g netlify-cli
 netlify login
 netlify deploy --prod --dir=www
 ```
-
-### 方案二：GitHub Pages（免费且长期稳定）
-
-仓库已内置 `.github/workflows/deploy-pages.yml`，推送到 `main` 分支即自动构建发布：
-
-```bash
-git add -A
-git commit -m "feat: 圣经阅读器"
-git branch -M main
-git remote add origin https://github.com/<你的用户名>/shengjing.git
-git push -u origin main
-```
-
-然后在 GitHub 仓库 Settings → Pages → Source 选 **GitHub Actions**，几分钟后访问
-`https://<你的用户名>.github.io/shengjing/`。
-
-注意：所有资源都用相对路径（`./sw.js`、`data/cuv.json`），放在子目录下也能正常工作。
 
 ### 方案三：Vercel
 
