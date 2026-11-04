@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#8b3d2f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="圣经" />
+    <title>圣经阅读器 · 和合本</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Source+Han+Serif+SC:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <button class="icon-btn" id="btn-menu" aria-label="打开书卷目录">☰</button>
+        <div class="brand" id="btn-home" role="button" tabindex="0">
+          <span class="brand-mark">聖</span>
+          <div>
+            <strong>圣经阅读器</strong>
+            <small>和合本 · 简体 · 本地数据</small>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" id="btn-search" aria-label="搜索">⌕</button>
+          <button class="icon-btn" id="btn-bookmarks" aria-label="书签">☆</button>
+          <button class="icon-btn" id="btn-theme" aria-label="切换主题">◐</button>
+        </div>
+      </header>
+
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-head">
+          <input id="book-filter" type="search" placeholder="筛选书卷…" />
+        </div>
+        <nav class="book-nav" id="book-nav"></nav>
+      </aside>
+      <div class="scrim" id="scrim" hidden></div>
+
+      <main class="reader">
+        <section class="home" id="home">
+          <p class="kicker">今日经文</p>
+          <blockquote id="daily-verse">正在准备今日经文…</blockquote>
+          <p class="daily-ref" id="daily-ref"></p>
+          <div class="home-actions">
+            <button class="btn primary" id="btn-continue">继续阅读</button>
+            <button class="btn" id="btn-john">从约翰福音开始</button>
+            <button class="btn" id="btn-genesis">从创世记开始</button>
+          </div>
+        </section>
+
+        <section class="chapter-view" id="chapter-view" hidden>
+          <div class="chapter-toolbar">
+            <button class="btn ghost" id="btn-prev">上一章</button>
+            <h1 id="chapter-title">创世记 1</h1>
+            <button class="btn ghost" id="btn-next">下一章</button>
+          </div>
+          <div class="font-row">
+            <button class="chip" id="font-down" aria-label="缩小字体">A−</button>
+            <button class="chip" id="font-up" aria-label="放大字体">A+</button>
+            <button class="chip" id="btn-bookmark-chapter">加入书签</button>
+            <button class="chip" id="btn-notes">本章注解</button>
+          </div>
+          <div class="chapter-picks" id="chapter-picks"></div>
+          <article class="verses" id="verses"></article>
+        </section>
+      </main>
+    </div>
+
+    <div class="panel" id="search-panel" hidden>
+      <div class="panel-card">
+        <header>
+          <h2>搜索经文</h2>
+          <button class="icon-btn" id="search-close" aria-label="关闭">✕</button>
+        </header>
+        <div class="search-row">
+          <input id="search-input" type="search" placeholder="关键词或章节，如：信心、约3:16" autocomplete="off" />
+          <button class="btn primary" id="btn-run-search" type="button">搜索</button>
+        </div>
+        <p class="search-hint">可搜经文用词，也可直接输入「约3:16」「约翰福音 3」跳转章节。</p>
+        <fieldset class="search-scope" id="search-scope">
+          <legend>搜索范围</legend>
+          <label>
+            <input type="radio" name="search-scope" value="ot" />
+            旧约
+          </label>
+          <label>
+            <input type="radio" name="search-scope" value="nt" />
+            新约
+          </label>
+          <label>
+            <input type="radio" name="search-scope" value="all" checked />
+            全部
+          </label>
+        </fieldset>
+        <div class="panel-body" id="search-results"></div>
+      </div>
+    </div>
+
+    <div class="panel" id="note-panel" hidden>
+      <div class="panel-card note-card">
+        <header>
+          <h2 id="note-title">注解</h2>
+          <button class="icon-btn" id="note-close" aria-label="关闭">✕</button>
+        </header>
+        <p class="search-hint" id="note-source"></p>
+        <div class="panel-body note-body" id="note-list"></div>
+      </div>
+    </div>
+
+    <div class="panel" id="bookmark-panel" hidden>
+      <div class="panel-card">
+        <header>
+          <h2>书签</h2>
+          <button class="icon-btn" id="bookmark-close" aria-label="关闭">✕</button>
+        </header>
+        <div class="panel-body" id="bookmark-list"></div>
+      </div>
+    </div>
+
+    <div class="install-bar" id="install-bar" hidden>
+      <p id="install-text">把阅读器安装到主屏幕，可像 App 一样打开。</p>
+      <button class="btn primary" id="btn-install" type="button">安装</button>
+      <button class="icon-btn" id="install-close" type="button" aria-label="关闭">✕</button>
+    </div>
+
+    <script src="books.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

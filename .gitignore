@@ -1,0 +1,15 @@
+.DS_Store
+Thumbs.db
+*.log
+tmp-mhcc/
+node_modules/
+www/
+android/.gradle/
+android/app/build/
+android/build/
+android/captures/
+android/app/build/
+*.aab
+.idea/
+android/local.properties
+android/app/src/main/assets/public/

@@ -1,0 +1,19 @@
+{
+  "name": "shengjing",
+  "private": true,
+  "description": "简体和合本圣经阅读器",
+  "scripts": {
+    "pack:www": "node scripts/pack-www.js",
+    "cap:sync": "npm run pack:www && cap sync",
+    "android:sync": "npm run pack:www && cap sync android",
+    "android:apk": "npm run android:sync && cd android && set JAVA_HOME=C:\\Java\\jdk-21&& gradlew.bat assembleDebug",
+    "serve": "python -m http.server 8080 --bind 0.0.0.0"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/core": "^7.4.4"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.4"
+  }
+}

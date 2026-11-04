@@ -1,0 +1,8 @@
+{
+  "appId": "com.shengjing.reader",
+  "appName": "圣经阅读器",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": true
+  }
+}
